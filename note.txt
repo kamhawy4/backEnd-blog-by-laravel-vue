@@ -1,0 +1,14 @@
+
+4 => sending message all subscribe
+
+
+5 => login by jwt 
+6 => auther [artical] | Auth
+7 => get all users but not show auth now 
+8 => make router in link profile return component user
+ 
+
+8 => chat by socket.io
+9 => notfiction by pusher
+
+
