@@ -77,6 +77,7 @@ const routes = [
       redirect: '/dashboard',
       name: 'Home',
       component: Home,
+      meta:{ requiresAuth: true },
       children:[
           {path: '/'                                    , name: 'dashboard', component: Dashboard},
 
