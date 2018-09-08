@@ -8,13 +8,12 @@ use App\User,App\Article,App\Subscribe,App\Categories;
 
 class ApiDashboardController extends Controller
 {
-  public function index()
+  public function index(Request $request)
   {
-	$users          =  User::count();
-	$article        =  Article::count();
-	$subscribe      =  Subscribe::count();
-	$categories     =  Categories::count();
-	
+  	$users          =  User::count();
+  	$article        =  Article::count();
+  	$subscribe      =  Subscribe::count();
+  	$categories     =  Categories::count();
     return response()->json([
     	                      'users'     => $users,
     	                      'article'   => $article,

@@ -39,7 +39,8 @@ class ApiArticlesController extends Controller
     			$imagfav    =   Image::make($path.'/'.$fullename);
     			$request    ->  merge(['image'=>$fullename]);
     		}
-   	    $request->merge(['slug'=>$this->make_slug($request->title)]);
+        $request->merge(['slug'=>$this->make_slug($request->title)]);
+   	    $request->merge(['author'=>auth('api')->user()->name]);
 
     	$article  =  Article::create($request->all());
 		return response()->json($article);

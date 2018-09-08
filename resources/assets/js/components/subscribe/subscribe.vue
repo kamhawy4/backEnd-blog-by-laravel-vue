@@ -105,7 +105,7 @@
           return {
              dataSubscribe:[],
              isLoading:false,
-             url:'/api/subscribe',
+             url:'/api/dashboard/subscribe',
              pagination:[],
           }
     	},mounted() {
@@ -134,7 +134,7 @@
                 }).then((result) => {
                   if (result.value) {
                     this.isLoading = true;
-                    this.$http.delete('/api/subscribe/'+id).then(response => {
+                    this.$http.delete('/api/dashboard/subscribe/'+id).then(response => {
                     this.isLoading = false;
                     this.dataSubscribe.splice(index,1);
                     this.flash('Data has been successfully Delete', 'success' ,{timeout:3000});

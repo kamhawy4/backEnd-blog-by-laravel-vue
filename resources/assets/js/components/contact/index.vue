@@ -72,7 +72,7 @@
           return {
              dataContact:[],
              isLoading:false,
-             url:'/api/contact/us',
+             url:'/api/dashboard/contact/us',
              pagination:[],
           }
     	},mounted() {
@@ -101,7 +101,7 @@
                 }).then((result) => {
                   if (result.value) {
                       this.isLoading = true;
-                      this.$http.delete('/api/contact/us/'+id).then(response => {
+                      this.$http.delete('/api/dashboard/contact/us/'+id).then(response => {
                       this.isLoading = false;
                       this.dataContact.splice(index,1);
                       this.$swal(

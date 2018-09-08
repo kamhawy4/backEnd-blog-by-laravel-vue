@@ -31,6 +31,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <link href="{{url('/')}}/admin/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <link href="{{url('/')}}/admin/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
         <link href="{{url('/')}}/admin/global/plugins/bootstrap/css/bootstrap-rtl.min.css" rel="stylesheet" type="text/css" />
+
         <link href="{{url('/')}}/admin/global/plugins/bootstrap-switch/css/bootstrap-switch-rtl.min.css" rel="stylesheet" type="text/css" />
         <link href="{{url('/')}}/admin/global/plugins/icheck/skins/all.css" rel="stylesheet" type="text/css" />
 
@@ -88,8 +89,16 @@ License: You must have a valid license purchased only from themeforest(the above
 
         <link href="{{url('/')}}/admin/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
 
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+         <link rel="stylesheet" type="text/css" href="/css/bootstrap-notifications.min.css">
+          
 
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://js.pusher.com/3.1/pusher.min.js"></script>
+
+
+
+
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <style type="text/css">
             
             .active {
@@ -107,282 +116,11 @@ License: You must have a valid license purchased only from themeforest(the above
         page-content-white page-md">
          <div class="page-wrapper"  >
             <!-- BEGIN HEADER -->
-            <div class="page-header navbar navbar-fixed-top">
-                <!-- BEGIN HEADER INNER -->
-                <div class="page-header-inner ">
-                    <!-- BEGIN LOGO -->
-                    <div class="page-logo">
-                        <a href="{{url('/')}}/auth">
-                            <img   src="{{url('/')}}/admin/layouts/layout/img/logo-invert.png" alt="logo" class="logo-default" /> </a>
-                        <div class="menu-toggler sidebar-toggler">
-                            <span></span>
-                        </div>
-                    </div>
-                    <!-- END LOGO -->
-                    <!-- BEGIN RESPONSIVE MENU TOGGLER -->
-                    <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span></span>
-                    </a>
-                    <!-- END RESPONSIVE MENU TOGGLER -->
-                    <!-- BEGIN TOP NAVIGATION MENU -->
-                    <div class="top-menu">
-                        <ul class="nav navbar-nav pull-right">
-                            <!-- BEGIN NOTIFICATION DROPDOWN -->
-                            <!-- DOC: Apply "dropdown-dark" class after "dropdown-extended" to change the dropdown styte -->
-                            <!-- DOC: Apply "dropdown-hoverable" class after below "dropdown" and remove data-toggle="dropdown" data-hover="dropdown" data-close-others="true" attributes to enable hover dropdown mode -->
-                            <!-- DOC: Remove "dropdown-hoverable" and add data-toggle="dropdown" data-hover="dropdown" data-close-others="true" attributes to the below A element with dropdown-toggle class -->
-
-
-                        <!--     <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
-                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                    <i class="fa fa-credit-card"></i>
-                                    <span class="badge badge-default"> 1 </span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="external">
-                                        <h3>انت لديك
-                                            <span class="bold">1 طلب جديد</span></h3>
-                                        <a href="{{url('/')}}/auth/volunteer">الكل</a>
-                                    </li>
-                                    <li>
-                                        <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
-                                         
-
-
-                                            <li>
-                                                <a href="#">
-                                                    <span class="photo">
-                                                        <img src="http://placehold.it/100x100" class="img-circle" alt=""> </span>
-                                                    <span class="subject">
-                                                        <span class="from">ali </span>
-                                                        <span class="time">الاحد </span>
-                                                    </span>
-                                                    <span class="message"> Hello </span>
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#">
-                                                    <span class="photo">
-                                                        <img src="http://placehold.it/100x100" class="img-circle" alt=""> </span>
-                                                    <span class="subject">
-                                                        <span class="from">ali </span>
-                                                        <span class="time">الاحد </span>
-                                                    </span>
-                                                    <span class="message"> Hello </span>
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#">
-                                                    <span class="photo">
-                                                        <img src="http://placehold.it/100x100" class="img-circle" alt=""> </span>
-                                                    <span class="subject">
-                                                        <span class="from">ali </span>
-                                                        <span class="time">الاحد </span>
-                                                    </span>
-                                                    <span class="message"> Hello </span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
- -->
-
-                            <!-- END TODO DROPDOWN -->
-                            <!-- BEGIN USER LOGIN DROPDOWN -->
-                            <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-                            <li class="dropdown dropdown-user">
-                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                    <img alt="" class="img-circle" src="{{url('/')}}/admin/layouts/layout/img/avatar3_small.jpg" />
-                                    <span class="username username-hide-on-mobile">
-                                      {{ Auth::user()->name }} 
-                                     </span>
-                                    <i class="fa fa-angle-down"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-default">
-                                    <li>
-                                        <a href="{{url('/')}}/dashboard/users/{{ Auth::user()->id }}/edit">
-                                            <i class="icon-user"></i>Profile</a>
-                                    </li>
-                                    <li>
-                                        <a   target="_blank" href="{{url('/')}}">
-                                            <i class="icon-eye"></i>Site</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{url('/')}}/logout">
-                                        <i class="icon-key"></i>LogOut</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!-- END USER LOGIN DROPDOWN -->
-                            <!-- END QUICK SIDEBAR TOGGLER -->
-                        </ul>
-                    </div>
-                    <!-- END TOP NAVIGATION MENU -->
-                </div>
-                <!-- END HEADER INNER -->
-            </div>
-            <!-- END HEADER -->
-            <!-- BEGIN HEADER & CONTENT DIVIDER -->
-            <div class="clearfix"> </div>
-            <!-- END HEADER & CONTENT DIVIDER -->
-            <!-- BEGIN CONTAINER -->
-            <div id="app"  class="page-container">
-                <!-- BEGIN SIDEBAR -->
-                <div class="page-sidebar-wrapper">
-                    <!-- BEGIN SIDEBAR -->
-                    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
-                    <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-                    <div class="page-sidebar navbar-collapse collapse">
-                        <!-- BEGIN SIDEBAR MENU -->
-                        <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
-                        <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
-                        <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
-                        <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
-                        <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
-                        <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-                        <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
-                            <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
-                            <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-                                <li class="sidebar-toggler-wrapper hide">
-                                    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-                                    <div class="sidebar-toggler">
-                                        <span></span>
-                                    </div>
-                                    <!-- END SIDEBAR TOGGLER BUTTON -->
-                                </li>
-
-
-                            <router-link  to="/dashboard" tag="li" active-class="active" exact class="nav-item ">
-                                <a class="nav-link">
-                                    <i class="fa fa-home"></i>
-                                    <span class="title"> Home </span>
-                                </a>
-                            </router-link>
-
-                            <router-link  to="/dashboard/settings" tag="li" exact active-class="active" class="nav-item ">
-                                <a class="nav-link">
-                                    <i class="fa fa-cogs"></i>
-                                    <span class="title"> Settings </span>
-                                </a>
-                            </router-link>
-
-
-                            <router-link  to="/dashboard/users" tag="li"  active-class="active" class="nav-item ">
-                                <a class="nav-link">
-                                    <i class="fa fa-user"></i>
-                                    <span class="title"> Users </span>
-                                </a>
-                            </router-link>
-
-
-
-                            <router-link  to="/dashboard/categorys" tag="li"  active-class="active" class="nav-item ">
-                                <a class="nav-link">
-                                    <i class="fa fa-user"></i>
-                                    <span class="title"> Categorys </span>
-                                </a>
-                            </router-link>
-
-
-
-                            <router-link  to="/dashboard/articles" tag="li"  active-class="active" class="nav-item ">
-                                <a class="nav-link">
-                                    <i class="fa fa-newspaper-o"></i>
-                                    <span class="title"> Articles </span>
-                                </a>
-                            </router-link>
-
-
-                            <router-link  to="/dashboard/contact/us" tag="li"  active-class="active" class="nav-item ">
-                                <a class="nav-link">
-                                    <i class="fa fa-inbox"></i>
-                                    <span class="title"> Contact Us </span>
-                                </a>
-                            </router-link>
-
-
-                             <router-link  to="/dashboard/subscribe" tag="li"  active-class="active" class="nav-item ">
-                                <a class="nav-link">
-                                    <i class="fa fa-thumbs-o-up"></i>
-                                    <span class="title"> Subscribe </span>
-                                </a>
-                            </router-link>
-
-                             <router-link  to="/dashboard/chat" tag="li"  active-class="active" class="nav-item ">
-                                <a class="nav-link">
-                                    <i class="fa fa-commenting"></i>
-                                    <span class="title"> Chat </span>
-                                </a>
-                            </router-link>
- 
-
-                        </ul>
-                        <!-- END SIDEBAR MENU -->
-                        <!-- END SIDEBAR MENU -->
-                    </div>
-                    <!-- END SIDEBAR -->
-                </div>
-                <!-- END SIDEBAR -->
-                <!-- BEGIN CONTENT -->
-                <div class="page-content-wrapper">
-                    <!-- BEGIN CONTENT BODY -->
-                    <div class="page-content">
-                    @if(session()->has('success'))
-                        <div class="box-body">
-                            <div class="alert alert-success alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                               {{ @session()->get('success') }}
-                            </div>
-                        </div>
-                    @endif
-                     @if(session()->has('warning'))
-                        <div class="box-body">
-                            <div class="alert alert-warning alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                               {{ @session()->get('warning') }}
-                            </div>
-                        </div>
-                    @endif
-
-                        @if(count($errors))
-
-                        <div class="alert alert-danger">
-
-                            <ul>
-
-                                @foreach($errors->all() as $error)
-
-                                   <li>{{ $error }}</li>
-
-                                @endforeach
-
-                            </ul>
-
-                        </div>
-
-                        @endif
-
-                     
-                        @yield('content') 
-                    
-
-                    </div>
-                    <!-- END CONTENT BODY -->
-                </div>
-                <!-- END CONTENT -->
-            <div class="page-footer">
-                <div class="page-footer-inner"> Copyright &copy;
-                    <a target="_blank" href="http://glowapps.com.eg">Abdo</a> &nbsp;|&nbsp; {{ date("Y") }}
-                </div>
-                <div class="scroll-to-top">
-                    <i class="icon-arrow-up"></i>
-                </div>
-            </div>
-            <!-- END FOOTER -->
+        
+        <div  id="app" >
+           <router-view></router-view>  
         </div>
+
         <!--[if lt IE 9]>
 <script src="{{url('/')}}/admin/global/plugins/respond.min.js"></script>
 <script src="{{url('/')}}/admin/global/plugins/excanvas.min.js"></script> 
@@ -507,7 +245,61 @@ License: You must have a valid license purchased only from themeforest(the above
                     $('#radio1003').attr('checked', 'checked');
                 });
             })
+
+      var notificationsWrapper   = $('.dropdown-notifications');
+      var notificationsToggle    = notificationsWrapper.find('a[data-toggle]');
+      var notificationsCountElem = notificationsToggle.find('i[data-count]');
+      var notificationsCount     = parseInt(notificationsCountElem.data('count'));
+      var notifications          = notificationsWrapper.find('ul.dropdown-menu');
+
+      if (notificationsCount <= 0) {
+        notificationsWrapper.hide();
+      }
+
+      // Enable pusher logging - don't include this in production
+      // Pusher.logToConsole = true;
+
+      var pusher = new Pusher('378fa63784c9b95b0f39', {
+        cluster: 'eu',
+        encrypted: true
+      });
+
+      // Subscribe to the channel we specified in our Laravel Event
+      var channel = pusher.subscribe('status-liked');
+      // Bind a function to a Event (the full Laravel class)
+      channel.bind('StatusLiked', function(data) {
+        var existingNotifications = notifications.html();
+        var avatar = Math.floor(Math.random() * (71 - 20 + 1)) + 20;
+        var newNotificationHtml = `
+          <li class="notification active">
+              <div class="media">
+                <div class="media-left">
+                  <div class="media-object">
+                    <img src="https://api.adorable.io/avatars/71/`+avatar+`.png" class="img-circle" alt="50x50" style="width: 50px; height: 50px;">
+                  </div>
+                </div>
+                <div class="media-body">
+                  <strong class="notification-title">`+data+`</strong>
+                  <!--p class="notification-desc">Extra description can go here</p-->
+                  <div class="notification-meta">
+                    <small class="timestamp">about a minute ago</small>
+                  </div>
+                </div>
+              </div>
+          </li>
+        `;
+        notifications.html(newNotificationHtml + existingNotifications);
+
+        notificationsCount += 1;
+        notificationsCountElem.attr('data-count', notificationsCount);
+        notificationsWrapper.find('.notif-count').text(notificationsCount);
+        notificationsWrapper.show();
+      });
+    </script>
         </script>
+
+
+
 
         @yield('js')
     </body>

@@ -1,8 +1,27 @@
 <template>
 <div  v-loading="isLoading" >
-    <h2>Articles listing</h2>
-    <router-link to="articles/create" class="btn btn-success ">Add New Article</router-link>
-	<flash-message style="margin-top: 20px" class="myCustomClass"></flash-message>
+
+<div class="row">
+   <div class="col-md-12">
+    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+      <div class="portlet light bordered">
+         <div class="portlet-title">
+             <div class="caption font-dark">
+                 <i class="fa fa-users font-dark"></i>
+                 <span class="caption-subject bold   ">Table of Articles</span>
+             </div>  
+         </div>
+
+         <flash-message  class="myCustomClass"></flash-message>
+        <div class="portlet-body">
+    <div class="table-toolbar">
+        <div class="row">
+            <div class="col-md-6">
+                <router-link to="articles/create" class="btn btn-primary">Add New Article</router-link>
+            </div>
+        </div>
+    </div>
+
     <table style="margin-top: 20px"  class="table table-striped table-bordered table-hover table-checkable order-column" >
         <thead>
             <tr>
@@ -19,7 +38,7 @@
                 <td>{{article.id}}</td>
                 <td>{{article.title}}</td>
                 <td>{{article.author}}</td>
-                <td>{{article.type}}</tds>
+                <td>{{article.type}}</td>
                 <td>{{article.get_name_categorie.name}}</td>
                 <td>
                    <router-link  class="btn btn-primary" :to="{name:'ediarticle' , params:{article_id:article.id }}" > <i class="fa fa-pencil"></i> Edit</router-link>
@@ -37,7 +56,11 @@
     	:disabled="!pagination.next_page_url" >Next</button>
     	
     </div>
-
+</div>
+</div>
+   <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+</div>
 </div>
 </template>
 
@@ -47,7 +70,7 @@ export default {
     	return {
          articles:[],
          isLoading:false,
-         url:'/api/articles',
+         url:'/api/dashboard/articles',
          pagination:[],
     	}
       },mounted(){
@@ -81,7 +104,7 @@ export default {
 
 
                 			  this.isLoading = true;
-                			  this.$http.delete('/api/articles/'+id).then(response => {
+                			  this.$http.delete('/api/dashboard/articles/'+id).then(response => {
                 			  this.isLoading = false;
                 		      this.articles.splice(index,1);
                           this.$swal(

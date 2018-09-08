@@ -2,7 +2,7 @@
     <div  v-loading="isLoading" >
 	<div class="panel panel-default">
 	  <div style="text-align: center;" class="panel-heading">Add New Article</div>
-    <router-link style="margin-top: 20px"  to="/dashboard/articles" class="btn btn-primary" >Show Article</router-link>
+    <router-link style="margin-top: 20px"  to="/dashboard/articles" class="btn btn-primary" >Show Articles</router-link>
 	</div>
         <flash-message class="myCustomClass"></flash-message>
             <div class="form-group">
@@ -84,7 +84,7 @@ export default {
    this.GetDatCategorys();
   },methods: {
 	GetDatCategorys:function(){
-	  this.$http.get('/api/allcategory/artical').then(response => {
+	  this.$http.get('/api/dashboard/allcategory/artical').then(response => {
 	  this.categorys = response.data;
 	  }, response => {
 	   this.flash('Something went wrong', 'error',{timeout:3000});
@@ -104,7 +104,7 @@ export default {
 				formData.append("categorie_id",this.categorie);
 				formData.append("type",this.type);
 				formData.append("description",this.description);
-		        this.$http.post('/api/articles',formData).then(response => {
+		        this.$http.post('/api/dashboard/articles',formData).then(response => {
 		       	this.isLoading   = false;
 		       	this.errors      = '';
 		        this.flash('Data has been successfully Send', 'success' ,{timeout:3000});

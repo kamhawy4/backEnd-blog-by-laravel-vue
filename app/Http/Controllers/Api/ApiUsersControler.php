@@ -11,6 +11,7 @@ use Auth;
 
 class ApiUsersControler extends Controller
 {
+
    public function store(ControllerUsers $request)
    {
      $request   ->  merge(['password' => bcrypt($request->password)]); 
@@ -20,7 +21,7 @@ class ApiUsersControler extends Controller
 
    public function index()
    {
-   	 $user =  User::orderBy("id","DESC")->paginate(5);
+   	 $user =  User::where('id','!=',auth('api')->user()->id)->orderBy("id","DESC")->paginate(5);
    	 return response()->json($user);	
    }
 

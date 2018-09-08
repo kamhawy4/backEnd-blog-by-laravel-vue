@@ -112,6 +112,7 @@
 	        </div>
 	    </div>
 	</div>
+    
   </div>
 </div>
 </template>
@@ -131,11 +132,7 @@
 		     },methods:{
 		     	getdata:function() {
 					  this.isLoading = true;
-					  this.$http.get('/api/dashboard',{
-								headers: {
-							Authorization: 'Bearer ' + localStorage.getItem('token')
-							}
-					  }).then(response => {
+					  this.$http.get('/api/dashboard').then(response => {
 					    var data           = response.body;
 					    this.users         = data.users;
 					    this.article       = data.article;

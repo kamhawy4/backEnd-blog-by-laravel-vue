@@ -88,7 +88,7 @@ export default {
    this.GetDatCategorys();
   },methods: {
    GetDat:function(){
-        this.$http.get('/api/articles/'+this.article_id).then(response => {
+        this.$http.get('/api/dashboard/articles/'+this.article_id).then(response => {
             var articles        = response.body;
 			this.title          = articles.title
 			this.categorie      = articles.categorie_id
@@ -100,7 +100,7 @@ export default {
         });
     },
    GetDatCategorys:function(){
-	  this.$http.get('/api/allcategory/artical').then(response => {
+	  this.$http.get('/api/dashboard/allcategory/artical').then(response => {
 	  this.categorys = response.data;
 	  }, response => {
 	   this.flash('Something went wrong', 'error',{timeout:3000});
@@ -121,7 +121,7 @@ export default {
 				formData.append("categorie_id",this.categorie);
 				formData.append("type",this.type);
 				formData.append("description",this.description);
-		        this.$http.post('/api/editarticles/'+this.article_id,formData).then(response => {
+		        this.$http.post('/api/dashboard/editarticles/'+this.article_id,formData).then(response => {
 		       	this.isLoading      = false;
 		       	this.errors         = '';
                 var articles        = response.body;

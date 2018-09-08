@@ -72,7 +72,7 @@ export default {
    },methods:{
             StoreData:function(){
             this.isLoading = true;
-            this.$http.post('/api/users',{
+            this.$http.post('/api/dashboard/users',{
              name:this.name,
              email:this.email,
              password:this.password,

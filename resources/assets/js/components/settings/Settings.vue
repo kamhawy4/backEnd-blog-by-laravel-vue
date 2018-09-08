@@ -99,7 +99,7 @@
         },methods:{
 	    	getData:function() {
 	    	  this.isLoading = true;
-			  this.$http.get('/api/get/settings').then(response => {
+			  this.$http.get('/api/dashboard/get/settings').then(response => {
 			  this.isLoading = false;
 				var settings   = response.data;
 				this.id_settings = settings.id
@@ -142,7 +142,7 @@
 				formData.append("meta_keywords",this.meta_keywords);
 				formData.append("meta_description",this.meta_description);
 
-				this.$http.post('/api/store/settings/'+this.id_settings,formData).then(response => {
+				this.$http.post('/api/dashboard/store/settings/'+this.id_settings,formData).then(response => {
 			    this.isLoading = false;
 				this.logo = response.data.logo;
 				this.fav  = response.data.fav;

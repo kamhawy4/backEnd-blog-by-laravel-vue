@@ -12,30 +12,49 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
 Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
-Route::get('/dashboard'             ,'Api\ApiDashboardController@index');
+
+Route::group(['middleware' => 'api'], function ($router) {
+
+    Route::post('login'                     , 'Api\AuthController@login');
+    Route::post('refresh'                   , 'Api\AuthController@refresh');
+});
 
 
-Route::get('get/settings'           ,'Api\ApiSettingsControler@GetData');
-Route::post('store/settings/{id}'   ,'Api\ApiSettingsControler@update');
+Route::group(['middleware' => 'auth:api','prefix' => 'dashboard'], function ($router) {
 
 
-Route::resource('users'          ,'Api\ApiUsersControler');
+    Route::get('/'                           ,'Api\ApiDashboardController@index');
+ 
+    Route::post('logout'                     , 'Api\AuthLogOutController@logout');
 
-Route::resource('categorys'    ,'Api\ApiCategorysController');
+    
+	Route::get('get/settings'                ,'Api\ApiSettingsControler@GetData');
+	Route::post('store/settings/{id}'        ,'Api\ApiSettingsControler@update');
 
-Route::resource('articles'              ,'Api\ApiArticlesController');	
-Route::post('editarticles/{article_id}' ,'Api\ApiArticlesController@update');	
 
-Route::get('allcategory/artical'  ,'Api\ApiArticlesController@AllCategoryArtical');
-Route::get('editcategory/artical' ,'Api\ApiArticlesController@EditCategoryArtical');
+	Route::resource('users'                 ,'Api\ApiUsersControler');
 
-Route::resource('contact/us'      ,'Api\ApiContactUsController');
 
-Route::resource('subscribe'       ,'Api\SubscribeController');
+	Route::resource('categorys'             ,'Api\ApiCategorysController');
 
-Route::resource('chat'            ,'Api\ApiChatController');
+	Route::resource('articles'              ,'Api\ApiArticlesController');	
+	Route::post('editarticles/{article_id}' ,'Api\ApiArticlesController@update');	
+
+
+	Route::get('allcategory/artical'        ,'Api\ApiArticlesController@AllCategoryArtical');
+	Route::get('editcategory/artical'       ,'Api\ApiArticlesController@EditCategoryArtical');
+
+
+	Route::resource('contact/us'            ,'Api\ApiContactUsController');
+
+	Route::resource('subscribe'             ,'Api\SubscribeController');
+
+	Route::resource('chat'                  ,'Api\ApiChatController');
+
+
+});
+
 

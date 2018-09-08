@@ -12,14 +12,15 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.dashboard.index');
 });
 
+/*Route::get('login'                     , 'Admin\AuthController@login');
 
 
 
-Route::group(['prefix'=>'dashboard','middleware'=>'admin'],function(){
-	
+Route::group(['prefix'=>'dashboard','middleware'=>'api'],function(){
+  
   Route::get('/'                   ,'Admin\DashboardController@index');
 
   Route::get('settings'            ,'Admin\SettingsController@index');
@@ -36,7 +37,7 @@ Route::group(['prefix'=>'dashboard','middleware'=>'admin'],function(){
 
   Route::resource('chat'           ,'Admin\ChatController');
 
+});*/
 
-});
 
 Auth::routes();

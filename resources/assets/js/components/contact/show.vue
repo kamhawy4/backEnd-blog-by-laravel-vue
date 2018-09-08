@@ -66,7 +66,7 @@
         },methods:{
           getData:function(){
 			  this.isLoading = true;
-			  this.$http.get('/api/contact/us/'+this.message_id).then(response => {
+			  this.$http.get('/api/dashboard/contact/us/'+this.message_id).then(response => {
 			    var data      = response.body;
 			    console.log(response.body);
 				this.name     = data.name

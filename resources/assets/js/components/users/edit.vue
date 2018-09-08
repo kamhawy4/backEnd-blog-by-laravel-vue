@@ -75,7 +75,7 @@ export default {
     this.getData();
    },methods:{
            getData:function() {
-                this.$http.get('/api/users/'+this.user_id).then(response => {
+                this.$http.get('/api/dashboard/users/'+this.user_id).then(response => {
                  var users     = response.body;
                  this.name     = users.name
                  this.email    = users.email
@@ -89,7 +89,7 @@ export default {
            UpdateData:function(){
             this.isLoading = true;
 
-            this.$http.put('/api/users/'+this.user_id,{
+            this.$http.put('/api/dashboard/users/'+this.user_id,{
              name:this.name,
              email:this.email,
              password:this.password,

@@ -71,7 +71,7 @@
        return {
            users:[],
            isLoading:false,
-           url:'/api/users',
+           url:'/api/dashboard/users',
            pagination:[],
        }
       },mounted() {
@@ -100,7 +100,7 @@
                 }).then((result) => {
                   if (result.value) {
 
-                     this.$http.delete('/api/users/'+id).then(response => {
+                     this.$http.delete('/api/dashboard/users/'+id).then(response => {
                      this.users.splice(index,1);
                      this.flash('Data has been successfully Delete', 'success' ,{timeout:3000});
                      this.$swal(

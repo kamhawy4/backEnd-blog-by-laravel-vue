@@ -116,7 +116,7 @@
               id:'',
               errors:[],
               isLoading:false,
-              url:'/api/categorys',
+              url:'/api/dashboard/categorys',
               pagination:[],
               editindex:'',
     		}
@@ -137,7 +137,7 @@
 			},
 			AddCategory:function() {
 				this.isLoading = true;
-			    this.$http.post('/api/categorys',{name:this.name}).then(response => {
+			    this.$http.post('/api/dashboard/categorys',{name:this.name}).then(response => {
 			    this.categorys.push({"name":this.name});
 			  	this.isLoading = false;
 			  	this.name   = '',
@@ -156,7 +156,7 @@
 				this.editindex   = index;
 			},updateData:function() {
 				this.isLoading = true;
-			    this.$http.put('/api/categorys/'+this.id,{name:this.editName}).then(response => {
+			    this.$http.put('/api/dashboard/categorys/'+this.id,{name:this.editName}).then(response => {
 			    this.categorys[this.editindex].name = this.editName;
 			  	this.isLoading = false;
 			  	this.errors = '',
@@ -181,7 +181,7 @@
                   confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                   if (result.value) {
-					    this.$http.delete('/api/categorys/'+id).then(response => {
+					    this.$http.delete('/api/dashboard/categorys/'+id).then(response => {
 					    this.categorys.splice(index,1);	
 	                    this.$swal(
 	                      'Deleted!',
