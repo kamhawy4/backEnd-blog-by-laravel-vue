@@ -9,9 +9,8 @@ class SubscribeController extends Controller
 {
    public function index()
    {
-   	$subscribe = Subscribe::orderBy("id","DESC")->paginate(5);
-
-   	return response()->json($subscribe);
+   	  $subscribe = Subscribe::orderBy("id","DESC")->paginate(5);
+   	  return response()->json($subscribe);
    }
 
     public function destroy($id)

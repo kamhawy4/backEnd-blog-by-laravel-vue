@@ -54,6 +54,8 @@ Route::group(['middleware' => 'auth:api','prefix' => 'dashboard'], function ($ro
 
 	Route::resource('chat'                  ,'Api\ApiChatController');
 
+	Route::post('send/all/message'           ,'Api\ControllersendAllMessage@SendMessage');
+
 
 });
 

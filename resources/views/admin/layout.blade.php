@@ -132,7 +132,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
         <script src="{{url('/')}}/admin/global/plugins/jquery.min.js" type="text/javascript"></script>
 
-         <script src="{{url('/')}}/admin/global/plugins/bootstrap-switch/js/bootstrap-switch.js" type="text/javascript"></script>
+         <script src="{{url('/')}}/admin/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 
 
        
@@ -208,7 +208,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <script src="{{url('/')}}/admin/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
         <script src="{{url('/')}}/admin/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
         <script src="{{url('/')}}/admin/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
-        <script src="{{url('/')}}/admin/global/scripts/app.min.js" type="text/javascript"></script>
+        
         <script src="{{url('/')}}/admin/pages/scripts/table-datatables-ajax.js" type="text/javascript"></script>
         
         <script src="{{url('/')}}/admin/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
@@ -218,10 +218,12 @@ License: You must have a valid license purchased only from themeforest(the above
 
 
         <script src="{{url('/')}}/admin/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
+
+
+
         <script src="{{url('/')}}/admin/global/plugins/icheck/icheck.min.js" type="text/javascript"></script>
         <script src="{{url('/')}}/admin/pages/scripts/form-icheck.min.js" type="text/javascript"></script>
 
-        <script src="{{url('/')}}/admin/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
 
          <script src="{{url('/')}}/admin//pages/scripts/components-select2.min.js" type="text/javascript"></script>
 

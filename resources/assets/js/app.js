@@ -12,6 +12,8 @@ window.Vue = require('vue');
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
+
+
 var VueResource = require('vue-resource');
 Vue.use(VueResource);
 
@@ -30,7 +32,6 @@ Vue.use(VueLoading, {
 
 Vue.use(require('vue-moment'));
 
-
 import Vue from 'vue';
 import VueSweetalert2 from 'vue-sweetalert2';
 Vue.use(VueSweetalert2);
@@ -38,10 +39,22 @@ Vue.use(VueSweetalert2);
 
 import store from './store'
 
+
+// jquery
+
 var id_username =  localStorage.getItem('id_username');
 $(".id-localStorage").attr("href", "/#/dashboard/users/"+id_username+"/edit");
 
- 
+
+/*$(document).ready(function()
+{
+   $("#clickmewow").click(function(){
+      $('input:checkbox').not(this).prop('checked', this.checked);
+  });
+})*/
+
+
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -113,6 +126,8 @@ const router = new VueRouter({
  /* mode: 'history',*/
   routes // short for `routes: routes`
 })
+
+
 
 
 router.beforeEach((to, from, next) => {

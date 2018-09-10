@@ -1,26 +1,30 @@
 <template>
  <div  v-loading="isLoading" >
-  						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-  						  <div class="modal-dialog" role="document">
-  						    <div class="modal-content">
-  						      <div class="modal-body">
-  						        <span class="namesite hidden" >blog</span>
-  						          <div class="form-group">
-  						            <label for="recipient-name" class="control-label">Title:</label>
-  						            <input type="text" name="subject"   class="form-control subject" id="recipient-name">
-  						          </div>
-  						          <div class="form-group">
-  						            <label for="message-text" class="control-label">Message:</label>
-  						            <textarea class="form-control" name="desc_message"  id="message-text"></textarea>
-  						          </div>
-  						      </div>
-  						      <div class="modal-footer">
-  						        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-  						        <button type="button" class="btn btn-primary"    id="send" data-dismiss="modal">Send</button>
-  						      </div>
-  						    </div>
-  						  </div>
-  						</div>
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-body">
+                      <label class="text-danger"   v-if="errors.emails" >{{errors.emails[0]}}</label>
+                      <span class="namesite hidden" >blog</span>
+                        <div class="form-group">
+                          <label for="recipient-name" class="control-label">Title:</label>
+                          <input type="text" v-model="title" name="subject"   class="form-control subject" id="recipient-name">
+                          <label class="text-danger"  v-if="errors.title" >{{errors.title[0]}}</label>
+
+                        </div>
+                        <div class="form-group">
+                          <label for="message-text" class="control-label">Message:</label>
+                          <textarea  v-model="desc_message" class="form-control" name="desc_message"  id="message-text"></textarea>
+                           <label class="text-danger"  v-if="errors.desc_message" >{{errors.desc_message[0]}}</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button @click="Senddata()" type="button" class="btn btn-primary"    id="send" >Send</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
             <div class="row">
                 <div class="col-md-12">
@@ -43,50 +47,49 @@
                                 </div>
                             </div>
                             <flash-message class="myCustomClass"></flash-message>
-                            <table class="table table-striped table-bordered table-hover table-checkable order-column">
-                              
+                            <table class="table table-striped table-bordered table-hover table-checkable order-column" >
                                 <thead>
                                     <tr>
-                                        <th>
+                                     
+                                          <th>
                                             <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                                                            <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" />
-                                                            <span></span>
-                                              </label>
+                                                <input type="checkbox" @click="selectAll" v-model="allSelected">
+                                                <span></span>
+                                            </label>
                                           </th>
-
                                         <th> Email </th>
                                         <th> Date </th>
                                        <th> Options </th> 
                                     </tr>
                                 </thead>
                                 <tbody> 
-                                    <tr v-for="(dataSubscribes,index) in dataSubscribe" class="odd gradeX">
+                                    <tr v-for="(data,index) in dataSubscribe" class="odd gradeX">
                                       <td>
-                                      <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                                          <input type="checkbox" class="checkboxes" value="1" />
-                                          <span></span>
-                                      </label>
+                                        <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                            <input type="checkbox" v-model="userIds" @click="select" :value="data.email">
+                                            <span></span>
+                                        </label>
                                       </td>
 
-                                        <td>{{dataSubscribes.email}}</td>
+                                        <td>{{data.email}}</td>
                                         <td>
-                                           {{dataSubscribes.created_at | moment("from", "now", true) }}
+                                           {{data.created_at | moment("from", "now", true) }}
                                         </td>
                                         
                                          <td>
-                														<div class="col-md-4" >  
-                														<a class="btn btn-danger"   href="javascript:;" @click="DeleteData(dataSubscribes.id,index)"  >delete</a> 
-                														</div>
+                                            <div class="col-md-4" >  
+                                            <a class="btn btn-danger"   href="javascript:;" @click="DeleteData(data.id,index)"  >delete</a> 
+                                            </div>
                                         </td> 
                                     </tr>
                                 </tbody>
                             </table>
 
-            									<div class="pagination" >
-            									  <button class="btn btn-dafault" @click="fetchPaginate(pagination.prev_page_url)"  :disabled="!pagination.prev_page_url" >Previos</button>
-            									  <span>  page {{pagination.current_page}} of {{pagination.last_page}} </span>
-            									  <button class="btn btn-dafault" @click="fetchPaginate(pagination.next_page_url)"  :disabled="!pagination.next_page_url" >Next</button>
-            									</div>
+                              <div class="pagination" >
+                                <button class="btn btn-dafault" @click="fetchPaginate(pagination.prev_page_url)"  :disabled="!pagination.prev_page_url" >Previos</button>
+                                <span>  page {{pagination.current_page}} of {{pagination.last_page}} </span>
+                                <button class="btn btn-dafault" @click="fetchPaginate(pagination.next_page_url)"  :disabled="!pagination.next_page_url" >Next</button>
+                              </div>
 
 
                         </div>
@@ -101,28 +104,76 @@
 
 <script>
     export default {
-    	data(){
+      data(){
           return {
              dataSubscribe:[],
+             selected: [],
+             allSelected: false,
+             userIds: [],
+             title:'',
+             desc_message:'',
+             name_site:'',
+             errors:[],
              isLoading:false,
              url:'/api/dashboard/subscribe',
              pagination:[],
           }
-    	},mounted() {
+      },mounted() {
              this.getdata();
+             this.getdataSettings();
         },methods:{
-          getdata() {
+          selectAll: function() {
+            if(this.allSelected)
+            {
+              this.allSelected = false;
+            }else{
+              this.allSelected = true;
+            }
+
+            this.userIds = [];
+            if (this.allSelected) {
+            var i;
+            for (i = 0; i < this.dataSubscribe.length; i++) { 
+                this.userIds.push(this.dataSubscribe[i].email.toString());
+            }
+                
+            }
+        },
+        select: function() {
+            this.allSelected = false;
+        },Senddata() {
+              this.isLoading = true;
+              this.$http.post('/api/dashboard/send/all/message',{title:this.title,desc_message:this.desc_message,name_site:this.name_site,emails:this.userIds}).then(response => {
+              this.isLoading   = false;
+              this.flash('Messages has been successfully Send','success',{timeout:3000});
+             }, response => {
+                if(response.status == 422){
+                  this.errors = response.data.errors
+                }
+              this.isLoading = false;
+              this.flash('Something went wrong', 'error',{timeout:3000});
+        });
+      },getdataSettings:function() {
+          this.isLoading = true;
+        this.$http.get('/api/dashboard/get/settings').then(response => {
+        this.isLoading = false;
+        var settings   = response.data;
+        this.name_site = settings.name_site
+        }, response => {
+         this.flash('Something went wrong', 'error',{timeout:3000});  
+        });
+      },getdata() {
               let $this = this;
               this.isLoading = true;
-			  this.$http.get(this.url).then(response => {
+        this.$http.get(this.url).then(response => {
               this.isLoading   = false;
               this.dataSubscribe = response.body.data;
               $this.makepaginate(response.body);
-			  }, response => {
+        }, response => {
               this.isLoading = false;
                  this.flash('Something went wrong', 'error',{timeout:3000});
-			  });
-			},DeleteData:function(id,index) {
+        });
+      },DeleteData:function(id,index) {
               this.$swal({
                   title: 'Are you sure?',
                   text: "You won't be able to revert this!",
@@ -147,11 +198,8 @@
                     this.isLoading = false;
                     this.flash('Something went wrong', 'error',{timeout:3000});
                     });
-
-
                   }
-                })  
-
+                }) 
             },makepaginate(data){
             let pagination = {
                 current_page : data.current_page,
