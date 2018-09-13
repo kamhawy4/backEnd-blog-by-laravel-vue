@@ -40,20 +40,15 @@ Vue.use(VueSweetalert2);
 import store from './store'
 
 
+
+//var express =  require('express');
+//const socket = require('socket.io-client')('http://localhost:9090');
+//const io = require('socket.io')(80, { wsEngine: 'uws' });
+
 // jquery
 
 var id_username =  localStorage.getItem('id_username');
 $(".id-localStorage").attr("href", "/#/dashboard/users/"+id_username+"/edit");
-
-
-/*$(document).ready(function()
-{
-   $("#clickmewow").click(function(){
-      $('input:checkbox').not(this).prop('checked', this.checked);
-  });
-})*/
-
-
 
 
 /**

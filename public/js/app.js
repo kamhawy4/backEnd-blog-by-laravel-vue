@@ -12883,17 +12883,14 @@ __WEBPACK_IMPORTED_MODULE_3_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_4_vue_
 
 
 
+//var express =  require('express');
+//const socket = require('socket.io-client')('http://localhost:9090');
+//const io = require('socket.io')(80, { wsEngine: 'uws' });
+
 // jquery
 
 var id_username = localStorage.getItem('id_username');
 $(".id-localStorage").attr("href", "/#/dashboard/users/" + id_username + "/edit");
-
-/*$(document).ready(function()
-{
-   $("#clickmewow").click(function(){
-      $('input:checkbox').not(this).prop('checked', this.checked);
-  });
-})*/
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -64496,11 +64493,48 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
+var socket = io.connect('http://localhost:2000/');
 /* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        console.log('Component mounted.');
-    }
+	data: function data() {
+		return {
+			messageText: '',
+			messages: []
+		};
+	},
+	mounted: function mounted() {
+		socket.on("ClientMessage", function (data) {
+			this.messages.push(data);
+		}.bind(this));
+	}, methods: {
+		sendMessage: function sendMessage() {
+			var object = {
+				"message": this.messageText
+			};
+			socket.emit('newMessage', object);
+			this.messageText = '';
+		}
+	}
+
 });
 
 /***/ }),
@@ -64511,25 +64545,76 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "panel panel-default" }, [
+  return _c("div", [
+    _c(
+      "div",
+      { staticClass: "panel-heading", staticStyle: { "text-align": "center" } },
+      [_vm._v(" Chat Messages ")]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-sm-9  frame" }, [
       _c(
-        "div",
-        {
-          staticClass: "panel-heading",
-          staticStyle: { "text-align": "center" }
-        },
-        [_vm._v(" Chat Messages ")]
-      )
+        "ul",
+        { staticClass: "ul-chat" },
+        _vm._l(_vm.messages, function(message) {
+          return _c("li", { staticStyle: { width: "100%" } }, [
+            _c("div", { staticClass: "msj macro" }, [
+              _c("div", { staticClass: "text text-l" }, [
+                _c("p", [_vm._v(_vm._s(message.message))])
+              ])
+            ])
+          ])
+        })
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "example" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.messageText,
+              expression: "messageText"
+            }
+          ],
+          attrs: { type: "text", placeholder: "Send..", name: "search2" },
+          domProps: { value: _vm.messageText },
+          on: {
+            keyup: function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              _vm.sendMessage()
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.messageText = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            attrs: { type: "submit" },
+            on: {
+              click: function($event) {
+                _vm.sendMessage()
+              }
+            }
+          },
+          [_c("i", { staticClass: "fa fa-send" })]
+        )
+      ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

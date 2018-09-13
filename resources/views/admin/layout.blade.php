@@ -95,6 +95,10 @@ License: You must have a valid license purchased only from themeforest(the above
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="https://js.pusher.com/3.1/pusher.min.js"></script>
 
+        <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js" ></script>
+        
+         <link rel="stylesheet" type="text/css" href="/css/chatcss.css">
+
 
 
 
@@ -132,9 +136,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
         <script src="{{url('/')}}/admin/global/plugins/jquery.min.js" type="text/javascript"></script>
 
-         <script src="{{url('/')}}/admin/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
-
-
+        <script src="{{url('/')}}/admin/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
        
         <script src="{{url('/')}}/admin/global/plugins/js.cookie.min.js" type="text/javascript"></script>
         <script src="{{url('/')}}/admin/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
