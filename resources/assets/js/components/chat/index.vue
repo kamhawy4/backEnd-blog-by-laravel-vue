@@ -2,9 +2,9 @@
  <div v-loading="isLoading" >
    <div style="text-align: center;" class="panel-heading"> Chat Messages </div>
     <div  class="col-sm-9  frame">
-              <ul  class="ul-chat" >
+              <ul  v-chat-scroll class="ul-chat messages"  >
 
-              	<li v-for="message in messages" style="width:100%">
+              	<li class="message" v-for="message in messages" style="width:100%">
               		 <div v-bind:class="message.name === usersname ? 'auth ' : ''"  class="msj macro">
           				  <div class="text text-l">
           					<p> <span  style="color:#504949;font-size: 15px;font-family: cursive;" >{{ message.name }} :</span>    {{ message.message }}</p>
@@ -23,18 +23,18 @@
 </template>
 
 <script>
-	var socket = io.connect('http://localhost:2000/');
     export default {
         data() {
-        	return{
-  				messageText:'',
-  				messages:[],
+          return{
+          messageText:'',
+          messages:[],
           isLoading:false,
           usersname:'',
           usersname_id:'',
+	        socket:io.connect('http://localhost:2000/')
         	}
         },mounted:function(){
-		      socket.on("ClientMessage",function(data){
+		      this.socket.on("ClientMessage",function(data){
 		      	this.messages.push(data); 
 		      }.bind(this));
           this.getdata();
@@ -58,7 +58,7 @@
             "name":this.usersname,
 						"name_id":this.usersname_id,
 					};
-					socket.emit('newMessage',object);
+					this.socket.emit('newMessage',object);
 					this.messageText='';
 
 				}

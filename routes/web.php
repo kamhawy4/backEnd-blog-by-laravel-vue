@@ -16,9 +16,8 @@ Route::get('/', function () {
     return view('admin.dashboard.index');
 });
 
-/*Route::get('login'                     , 'Admin\AuthController@login');
 
-
+Route::get('/dashboard/login'      , 'Admin\AuthController@login');
 
 Route::group(['prefix'=>'dashboard','middleware'=>'api'],function(){
   
@@ -38,7 +37,7 @@ Route::group(['prefix'=>'dashboard','middleware'=>'api'],function(){
 
   Route::resource('chat'           ,'Admin\ChatController');
 
-});*/
+});
 
 
 Auth::routes();

@@ -37,6 +37,9 @@ import VueSweetalert2 from 'vue-sweetalert2';
 Vue.use(VueSweetalert2);
 
 
+import VueChatScroll from 'vue-chat-scroll'
+Vue.use(VueChatScroll)
+
 import store from './store'
 
 
@@ -108,8 +111,8 @@ const routes = [
           { path: '/dashboard/subscribe'                 , component: subscribe },
           { path: '/dashboard/chat'                      , component: chat },
       ]},
-      { path: '/login'                                   , name: 'login',component: LoginComponent},
-      { path: '/logout'                                  , name: 'logout',component: LogoutComponent},
+      { path: '/dashboard/login'                                   , name: 'login',component: LoginComponent},
+      { path: '/dashboard/logout'                                  , name: 'logout',component: LogoutComponent},
 ]
 
 
@@ -118,6 +121,7 @@ const routes = [
 // You can pass in additional options here, but let's
 // keep it simple for now.
 const router = new VueRouter({
+  mode: 'history',
  /* mode: 'history',*/
   routes // short for `routes: routes`
 })

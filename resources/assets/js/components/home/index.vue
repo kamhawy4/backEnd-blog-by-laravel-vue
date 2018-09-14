@@ -61,7 +61,7 @@
                                             <i class="icon-eye"></i>Site</a>
                                     </li>
                                     <li>
-                                        <router-link to="/logout"> <i class="icon-key"></i>Logout</router-link>
+                                        <router-link to="/dashboard/logout"> <i class="icon-key"></i>Logout</router-link>
                                     </li>
                                 </ul>
                             </li>

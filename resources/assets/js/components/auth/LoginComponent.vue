@@ -31,7 +31,7 @@
         methods: {
             submitLogin() {
                 this.loginError = false;
-                this.$http.post('/api/login', {email: this.email,password: this.password}).then(response => {
+                this.$http.post('/api/dashboard/login', {email: this.email,password: this.password}).then(response => {
                     console.log(response.data.data_token.name);
                     store.commit('loginUser')
                     localStorage.setItem('authCheck', JSON.stringify(true));
