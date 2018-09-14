@@ -49,6 +49,9 @@
           });
          },
          sendMessage:function(){
+          if(this.messageText == '') {
+            return false;
+          }
 					var object = 
 					{
             "message":this.messageText,

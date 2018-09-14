@@ -64541,6 +64541,9 @@ var socket = io.connect('http://localhost:2000/');
       });
     },
     sendMessage: function sendMessage() {
+      if (this.messageText == '') {
+        return false;
+      }
       var object = {
         "message": this.messageText,
         "name": this.usersname,
