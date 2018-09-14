@@ -64511,29 +64511,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 var socket = io.connect('http://localhost:2000/');
 /* harmony default export */ __webpack_exports__["default"] = ({
-	data: function data() {
-		return {
-			messageText: '',
-			messages: []
-		};
-	},
-	mounted: function mounted() {
-		socket.on("ClientMessage", function (data) {
-			this.messages.push(data);
-		}.bind(this));
-	}, methods: {
-		sendMessage: function sendMessage() {
-			var object = {
-				"message": this.messageText
-			};
-			socket.emit('newMessage', object);
-			this.messageText = '';
-		}
-	}
+  data: function data() {
+    return {
+      messageText: '',
+      messages: [],
+      isLoading: false,
+      usersname: '',
+      usersname_id: ''
+    };
+  },
+  mounted: function mounted() {
+    socket.on("ClientMessage", function (data) {
+      this.messages.push(data);
+    }.bind(this));
+    this.getdata();
+  }, methods: {
+    getdata: function getdata() {
+      var _this = this;
+
+      this.$http.get('/api/dashboard/chat').then(function (response) {
+        var data = response.body;
+        _this.usersname = data.name;
+        _this.usersname_id = data.id;
+      }, function (response) {
+        _this.flash('Something went wrong', 'error', { timeout: 3000 });
+      });
+    },
+    sendMessage: function sendMessage() {
+      var object = {
+        "message": this.messageText,
+        "name": this.usersname,
+        "name_id": this.usersname_id
+      };
+      socket.emit('newMessage', object);
+      this.messageText = '';
+    }
+  }
 
 });
 
@@ -64545,74 +64561,110 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      { staticClass: "panel-heading", staticStyle: { "text-align": "center" } },
-      [_vm._v(" Chat Messages ")]
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-sm-9  frame" }, [
+  return _c(
+    "div",
+    {
+      directives: [
+        {
+          name: "loading",
+          rawName: "v-loading",
+          value: _vm.isLoading,
+          expression: "isLoading"
+        }
+      ]
+    },
+    [
       _c(
-        "ul",
-        { staticClass: "ul-chat" },
-        _vm._l(_vm.messages, function(message) {
-          return _c("li", { staticStyle: { width: "100%" } }, [
-            _c("div", { staticClass: "msj macro" }, [
-              _c("div", { staticClass: "text text-l" }, [
-                _c("p", [_vm._v(_vm._s(message.message))])
-              ])
-            ])
-          ])
-        })
+        "div",
+        {
+          staticClass: "panel-heading",
+          staticStyle: { "text-align": "center" }
+        },
+        [_vm._v(" Chat Messages ")]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "example" }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.messageText,
-              expression: "messageText"
-            }
-          ],
-          attrs: { type: "text", placeholder: "Send..", name: "search2" },
-          domProps: { value: _vm.messageText },
-          on: {
-            keyup: function($event) {
-              if (
-                !("button" in $event) &&
-                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-              ) {
-                return null
-              }
-              _vm.sendMessage()
-            },
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.messageText = $event.target.value
-            }
-          }
-        }),
-        _vm._v(" "),
+      _c("div", { staticClass: "col-sm-9  frame" }, [
         _c(
-          "button",
-          {
-            attrs: { type: "submit" },
+          "ul",
+          { staticClass: "ul-chat" },
+          _vm._l(_vm.messages, function(message) {
+            return _c("li", { staticStyle: { width: "100%" } }, [
+              _c(
+                "div",
+                {
+                  staticClass: "msj macro",
+                  class: message.name === _vm.usersname ? "auth " : ""
+                },
+                [
+                  _c("div", { staticClass: "text text-l" }, [
+                    _c("p", [
+                      _c(
+                        "span",
+                        {
+                          staticStyle: {
+                            color: "#504949",
+                            "font-size": "15px",
+                            "font-family": "cursive"
+                          }
+                        },
+                        [_vm._v(_vm._s(message.name) + " :")]
+                      ),
+                      _vm._v("    " + _vm._s(message.message))
+                    ])
+                  ])
+                ]
+              )
+            ])
+          })
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "example" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.messageText,
+                expression: "messageText"
+              }
+            ],
+            attrs: { type: "text", placeholder: "Send..", name: "search2" },
+            domProps: { value: _vm.messageText },
             on: {
-              click: function($event) {
+              keyup: function($event) {
+                if (
+                  !("button" in $event) &&
+                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                ) {
+                  return null
+                }
                 _vm.sendMessage()
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.messageText = $event.target.value
               }
             }
-          },
-          [_c("i", { staticClass: "fa fa-send" })]
-        )
+          }),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              attrs: { type: "submit" },
+              on: {
+                click: function($event) {
+                  _vm.sendMessage()
+                }
+              }
+            },
+            [_c("i", { staticClass: "fa fa-send" })]
+          )
+        ])
       ])
-    ])
-  ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

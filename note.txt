@@ -1,14 +1,16 @@
+1 = route by laravel
 
-4 => sending message all subscribe
+2 = scrool chat
+
+3 = token expere
+
+4 = how to upload project make  node.js in postion production
 
 
-5 => login by jwt 
-6 => auther [artical] | Auth
-7 => get all users but not show auth now 
-8 => make router in link profile return component user
- 
+///
 
-8 => chat by socket.io
-9 => notfiction by pusher
+
+5 = study vuex
+
 
 

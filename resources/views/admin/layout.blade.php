@@ -97,10 +97,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
         <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js" ></script>
         
-         <link rel="stylesheet" type="text/css" href="/css/chatcss.css">
-
-
-
+        <link rel="stylesheet" type="text/css" href="/css/chatcss.css">
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <style type="text/css">
