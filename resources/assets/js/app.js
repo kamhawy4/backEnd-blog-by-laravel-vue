@@ -80,6 +80,10 @@ const chat             = require('./components/chat/index.vue');
 const LoginComponent   = require('./components/auth/LoginComponent.vue');
 const LogoutComponent  = require('./components/auth/LogoutComponent.vue');
 
+const BrandsIndex      = require('./components/brands/index.vue');
+const BrandsCreate     = require('./components/brands/create.vue');
+const BrandsEdit       = require('./components/brands/edit.vue');
+
 
 const routes = [
 
@@ -101,9 +105,14 @@ const routes = [
           { path: '/dashboard/categorys'                 , component: CategorysIndex },
 
           { path: '/dashboard/articles'                  , component: ArticlesIndex },
-
           { path: '/dashboard/articles/create'           , component: ArticlesCreate },
           { path: '/dashboard/articles/:article_id/edit' , name:'ediarticle' , component: ArticlesEdit ,props:true },
+
+
+          { path: '/dashboard/brands'                    , component: BrandsIndex },
+          { path: '/dashboard/brands/create'             , component: BrandsCreate },
+          { path: '/dashboard/brands/:brands_id/edit'    , name:'edibrands' , component: BrandsEdit ,props:true },
+
 
           { path: '/dashboard/contact/us'                , component: contactIndex },
           { path: '/dashboard/contact/us/:message_id'    , name:'showData' , component: messageShow ,props:true },
@@ -128,11 +137,8 @@ const router = new VueRouter({
 
 
 
-
 router.beforeEach((to, from, next) => {
     Vue.http.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
-
-
  if (to.matched.some(record => record.meta.requiresAuth)) {
         if(!localStorage.getItem('authCheck')) {
             router.push({ name: 'login' });
@@ -142,8 +148,8 @@ router.beforeEach((to, from, next) => {
     } else {
         next() // make sure to always call next()!
     }
-
 });
+
 
 
 // 4. Create and mount the root instance.

@@ -31,6 +31,8 @@ Route::group(['prefix'=>'dashboard','middleware'=>'api'],function(){
 
   Route::resource('articles'       ,'Admin\ArticlesController');
 
+  Route::resource('brands'         ,'Admin\BrandsController');
+
   Route::resource('contact/us'     ,'Admin\ContactUsController');
 
   Route::resource('subscribe'      ,'Admin\SubscribeController');

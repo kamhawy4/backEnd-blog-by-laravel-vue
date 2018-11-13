@@ -153,6 +153,14 @@
                             </router-link>
 
 
+                             <router-link  to="/dashboard/brands" tag="li"  active-class="active" class="nav-item ">
+                                <a class="nav-link">
+                                    <i class="fa fa-inbox"></i>
+                                    <span class="title"> Brands </span>
+                                </a>
+                            </router-link>
+
+
                              <router-link  to="/dashboard/subscribe" tag="li"  active-class="active" class="nav-item ">
                                 <a class="nav-link">
                                     <i class="fa fa-thumbs-o-up"></i>
