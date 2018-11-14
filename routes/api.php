@@ -36,6 +36,7 @@ Route::group(['middleware' => 'auth:api','prefix' => 'dashboard'], function ($ro
 	Route::resource('categorys'              ,'Api\ApiCategorysController');
 
 	Route::resource('brands'                 ,'Api\ApiBrandsController');
+	Route::post('editbrands/{brands_id}'     ,'Api\ApiBrandsController@update');	
 
 	Route::resource('articles'               ,'Api\ApiArticlesController');	
 	Route::post('editarticles/{article_id}'  ,'Api\ApiArticlesController@update');	

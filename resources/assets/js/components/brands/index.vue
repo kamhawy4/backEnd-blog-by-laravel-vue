@@ -35,7 +35,7 @@
             <tr  v-for="(brand,index) in brands" >
                 <td>{{brand.id}}</td>
                 <td>{{brand.name}}</td>
-                <td><img  v-bind:src="'/uploads/photo/'+brand.image"></td>
+                <td><img  style="width: 43px;height: 32px;" v-bind:src="'/uploads/photo/'+brand.image"></td>
                 <td>
                    <router-link  class="btn btn-primary" :to="{name:'edibrands' , params:{brands_id:brand.id }}" > <i class="fa fa-pencil"></i> Edit</router-link>
                     <a class="btn btn-danger" href="javascript:;"  @click="DeleteBrands(brand.id,index)" >Delete</a>
