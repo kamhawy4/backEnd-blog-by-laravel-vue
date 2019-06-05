@@ -62,7 +62,6 @@ $(".id-localStorage").attr("href", "/#/dashboard/users/"+id_username+"/edit");
 Vue.http.headers.common['X-CSRF-TOKEN']  = $('meta[name="csrf-token"]').attr('content');
 
 
-
 const Dashboard        = require('./components/dashboard/dashboard.vue');
 const Home             = require('./components/home/index.vue');
 const Settings         = require('./components/settings/Settings.vue');
@@ -84,6 +83,11 @@ const BrandsIndex      = require('./components/brands/index.vue');
 const BrandsCreate     = require('./components/brands/create.vue');
 const BrandsEdit       = require('./components/brands/edit.vue');
 
+const PartnersIndex      = require('./components/partners/index.vue');
+const PartnersCreate     = require('./components/partners/create.vue');
+const PartnersEdit       = require('./components/partners/edit.vue');
+
+
 
 const routes = [
 
@@ -91,10 +95,11 @@ const routes = [
       path: '/dashboard',
       redirect: '/dashboard',
       name: 'Home',
-      component: Home,
+      component: Home, // Component Parent
       meta:{ requiresAuth: true },
+      // Childrens
       children:[
-          {path: '/'                                    , name: 'dashboard', component: Dashboard},
+          {path: '/'                                     , name: 'dashboard', component: Dashboard},
 
           { path: '/dashboard/settings'                  , name: 'settings', component: Settings },
 
@@ -108,11 +113,13 @@ const routes = [
           { path: '/dashboard/articles/create'           , component: ArticlesCreate },
           { path: '/dashboard/articles/:article_id/edit' , name:'ediarticle' , component: ArticlesEdit ,props:true },
 
-
           { path: '/dashboard/brands'                    , component: BrandsIndex },
           { path: '/dashboard/brands/create'             , component: BrandsCreate },
           { path: '/dashboard/brands/:brands_id/edit'    , name:'edibrands' , component: BrandsEdit ,props:true },
 
+          { path: '/dashboard/partners'                  , component: PartnersIndex },
+          { path: '/dashboard/partners/create'           , component: PartnersCreate },
+          { path: '/dashboard/partners/:partners_id/edit', name:'editpartners',component: PartnersEdit ,props:true },
 
           { path: '/dashboard/contact/us'                , component: contactIndex },
           { path: '/dashboard/contact/us/:message_id'    , name:'showData' , component: messageShow ,props:true },
@@ -120,8 +127,10 @@ const routes = [
           { path: '/dashboard/subscribe'                 , component: subscribe },
           { path: '/dashboard/chat'                      , component: chat },
       ]},
-      { path: '/dashboard/login'                                   , name: 'login',component: LoginComponent},
-      { path: '/dashboard/logout'                                  , name: 'logout',component: LogoutComponent},
+                // Out Children  :: Url Auth
+
+                { path: '/dashboard/login'          , name: 'login',component: LoginComponent},
+                { path: '/dashboard/logout'         , name: 'logout',component: LogoutComponent},
 ]
 
 

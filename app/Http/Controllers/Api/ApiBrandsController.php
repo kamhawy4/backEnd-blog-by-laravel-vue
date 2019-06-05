@@ -63,7 +63,6 @@ class ApiBrandsController extends Controller
     }
 
 
-
    public function destroy($id)
    {
       $brands =  Brands::find($id);

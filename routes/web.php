@@ -13,7 +13,7 @@
 
 
 Route::get('/', function () {
-    return view('admin.dashboard.index');
+     return view('home');
 });
 
 
@@ -31,6 +31,8 @@ Route::group(['prefix'=>'dashboard','middleware'=>'api'],function(){
 
   Route::resource('articles'       ,'Admin\ArticlesController');
 
+  Route::resource('partners'        ,'Admin\PartnersController');
+
   Route::resource('brands'         ,'Admin\BrandsController');
 
   Route::resource('contact/us'     ,'Admin\ContactUsController');
@@ -38,7 +40,9 @@ Route::group(['prefix'=>'dashboard','middleware'=>'api'],function(){
   Route::resource('subscribe'      ,'Admin\SubscribeController');
 
   Route::resource('chat'           ,'Admin\ChatController');
+    
 
+    
 });
 
 

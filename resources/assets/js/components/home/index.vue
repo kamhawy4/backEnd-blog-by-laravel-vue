@@ -160,6 +160,13 @@
                                 </a>
                             </router-link>
 
+                            <router-link  to="/dashboard/partners" tag="li"  active-class="active" class="nav-item ">
+                                <a class="nav-link">
+                                    <i class="fa-handshake-o"></i>
+                                    <span class="title"> Partners </span>
+                                </a>
+                            </router-link>
+
 
                              <router-link  to="/dashboard/subscribe" tag="li"  active-class="active" class="nav-item ">
                                 <a class="nav-link">
